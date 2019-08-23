@@ -1,19 +1,17 @@
-var Letter = function(letter) {
-    this.letter = letter;
+function Letter(character) {
+    this.character = character;
     this.guessed = false;
-}
-
-Letter.prototype.display = function() {
-    if (this.guessed === true) {
-        return this.letter;
-    } else if (this.guessed === false){
-        return "_";
+    this.letterGuessed = function () {
+        if (this.guessed) {
+            return this.character;
+        } else {
+            return '_ ';
+        }
     }
-};
-
-Letter.prototype.checkLetter = function(guess) {
-    if (guess.toLowerCase() === this.letter.toLowerCase()) {
-        this.guessed === true;
+    this.makeGuess = function (guess) {
+        if (guess === this.character.toLowerCase()) {
+            this.guessed = true;
+        }
     }
 }
 

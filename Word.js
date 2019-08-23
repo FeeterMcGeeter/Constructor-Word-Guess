@@ -1,27 +1,23 @@
 var Letter = require("./Letter");
 
-var Word = function(word) {
-    this.constructWord = function(word) {
-        var storeLetter = [];
-        for (var i = 0; i < word.length; i++) {
-            var currentLetter = new Letter(word[i]);
-            storeLetter.push(currentLetter);
-        }
-        return storeLetter;
-    }
-    this.letters = this.constructWord(word);
-    this.wordChosen = word;
-    this.checkGuess = function(guess) {
-        for (var j = 0; j < this.letters.length; j++) {
-            this.letters[j].checkLetter(guess);
+function Word (word) {
+    this.letters = [];
+    this.wordArray = function () {
+        for (i = 0; i < word.length; i++) {
+            this.letters.push(new Letter(word.charAt(i)));
         }
     }
-    this.display = function() {
-        var storeLetter = "";
-        for (var k = 0; k < this.letters.length; k++) {
-            storeLetter += this.letters[k].display();
+    this.createWord = function () {
+        var createdWord = '';
+        for (var j in this.letters) {
+            createdWord = createdWord.concat(this.letters[j].letterGuessed());
         }
-        return storeLetter;
+        return createdWord;
+    }
+    this.checkGuess = function (letter) {
+        for (var k in this.letters) {
+            this.letters[k].makeGuess(letter);
+        }
     }
 }
 
